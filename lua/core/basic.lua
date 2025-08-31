@@ -28,3 +28,6 @@ vim.opt.smartcase = true
 
 -- search highlight
 -- vim.opt.hlsearch = false
+
+-- 保持距离底部和顶部的行数
+vim.opt.scrolloff = 8
