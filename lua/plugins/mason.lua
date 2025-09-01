@@ -22,7 +22,8 @@ return {
                 client.server_capabilities.documentFormattingProvider = false
                 client.server_capabilities.documentRangeFormattingProvider = false
             end
-            vim.lsp.config(nvim_lsp, config)
+            -- vim.lsp.config(nvim_lsp, config)
+            require("lspconfig")[nvim_lsp].setup(config)
         end
 
         -- lsp config
@@ -47,7 +48,7 @@ return {
             setup_lsp(server, config)
         end
 
-        vim.cmd("LspStart")
+        -- vim.cmd("LspStart")
         vim.diagnostic.config({
             underline = true,
             virtual_text = true,
