@@ -31,3 +31,6 @@ vim.opt.smartcase = true
 
 -- 保持距离底部和顶部的行数
 vim.opt.scrolloff = 8
+
+-- 关闭自动换行
+vim.opt.wrap = false
