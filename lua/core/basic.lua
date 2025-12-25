@@ -21,7 +21,7 @@ vim.g.mapleader = " "
 -- vim.opt.splitbelow = true
 -- vim.opt.splitright = ture
 
--- The search is not case sensitive, 
+-- The search is not case sensitive,
 -- but is case sensitive when it contains uppercase characters.
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -34,3 +34,6 @@ vim.opt.scrolloff = 8
 
 -- 关闭自动换行
 vim.opt.wrap = false
+
+-- 共享系统剪切板
+vim.opt.clipboard = "unnamedplus"

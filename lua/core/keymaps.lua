@@ -1,6 +1,6 @@
 -- Insert mod
-vim.keymap.set("i", "jk", "<Esc>", { silent = true })
+vim.keymap.set("i", "jk", "<Esc>", { silent = true, desc = "退出i模式" })
 
 -- clean search highlight
-vim.keymap.set("n", "<C-l>", ":nohlsearch<CR>", { silent = true })
-vim.keymap.set("i", "<C-l>", "<cmd>nohlsearch<CR>", { silent = true })
+vim.keymap.set("n", "<C-l>", ":nohlsearch<CR>", { silent = true, desc = "取消搜索高亮" })
+vim.keymap.set("i", "<C-l>", "<cmd>nohlsearch<CR>", { silent = true, desc = "取消搜索高亮" })

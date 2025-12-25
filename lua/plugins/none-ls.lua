@@ -16,7 +16,9 @@ return {
 
 		install("stylua")
 		install("black")
-        install("clang_format")
+		install("clang-format")
+		install("prettier")
+		install("shfmt")
 
 		local null_ls = require("null-ls")
 		null_ls.setup({
@@ -25,10 +27,27 @@ return {
 				null_ls.builtins.formatting.stylua,
 				-- python
 				null_ls.builtins.formatting.black,
+				-- null_ls.builtins.formatting.black.with({
+				-- 	command = vim.fn.stdpath("data") .. "/mason/packages/black/venv/bin/black",
+				-- }),
 				-- C/C++
 				null_ls.builtins.formatting.clang_format,
 				-- JS/TS
 				null_ls.builtins.formatting.prettier,
+
+				-- sh
+				null_ls.builtins.formatting.shfmt.with({
+					filetypes = { "sh", "bash", "zsh" },
+				}),
+				-- null_ls.builtins.formatting.shfmt.with({
+				-- 	filetypes = { "sh", "zsh" },
+				-- 	extra_args = {
+				-- 		"-ln",
+				-- 		"zsh",
+				-- 		"-i",
+				-- 		"2",
+				-- 	},
+				-- }),
 			},
 		})
 	end,
