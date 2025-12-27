@@ -7,6 +7,7 @@ return {
 	keys = {
 		{ "<leader>tt", "<cmd>NvimTreeToggle<CR>", desc = "打开/关闭文件树" },
 		{ "<leader>tF", "<cmd>NvimTreeFocus<CR>", desc = "聚焦到Nvim-tree" },
+		{ "<A-f>", "<cmd>NvimTreeFocus<CR>", desc = "聚焦到Nvim-tree" },
 		{ "<leader>to", "<cmd>NvimTreeOpen<CR>", desc = "打开Nvim-tree" },
 		{ "<leader>tf", "<cmd>NvimTreeFindFile<CR>", desc = "定位到当前文件" },
 	},
