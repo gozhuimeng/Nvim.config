@@ -42,13 +42,25 @@ return {
 			end
 		end
 
-		vim.keymap.set({ "i", "s" }, "<C-j>", expand_or_jump_to_next, { silent = true , desc = "跳转到下一处输入"})
+		vim.keymap.set({ "i", "s" }, "<C-j>", expand_or_jump_to_next, {
+			silent = true,
+			desc = "跳转到下一处输入",
+		})
 
-		vim.keymap.set({ "i", "s" }, "<C-k>", jump_to_previous, { silent = true ,desc ="跳转到上一处输入"})
+		vim.keymap.set({ "i", "s" }, "<C-k>", jump_to_previous, {
+			silent = true,
+			desc = "跳转到上一处输入",
+		})
 
-		vim.keymap.set({ "i", "s" }, "<S-j>", choice_next, { silent = true ,desc="跳转到下一个选择"})
+		vim.keymap.set({ "i", "s" }, "<S-j>", choice_next, {
+			silent = true,
+			desc = "跳转到下一个选择",
+		})
 
-		vim.keymap.set({ "i", "s" }, "<S-k>", choice_previous, { silent = true ,desc="跳转到上一处选择"})
+		vim.keymap.set({ "i", "s" }, "<S-k>", choice_previous, {
+			silent = true,
+			desc = "跳转到上一处选择",
+		})
 
 		ls_from_lua.lazy_load({
 			paths = { vim.fn.stdpath("config") .. "/lua/snippets/lua" },

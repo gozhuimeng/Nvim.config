@@ -27,6 +27,16 @@ return {
 			desc = "选择关闭一个buffer",
 		})
 		vim.keymap.set("n", "<A-c>", function()
+			-- 判断buffer是否保存
+			if vim.api.nvim_get_option_value("modified", { buf = 0 }) then
+				vim.notify(
+					"当前缓冲区有未保存的修改，请先保存在关闭",
+					vim.log.levels.WARN,
+					{ title = "Buffer 未保存" }
+				)
+				return
+			end
+
 			-- 记录当前buffer
 			local current = vim.api.nvim_get_current_buf()
 
@@ -52,6 +62,7 @@ return {
 			else
 				vim.cmd("enew")
 				vim.cmd("bdelete" .. current)
+                vim.cmd("NvimTreeFocus")
 			end
 		end, {
 			desc = "关闭当前buffer",
