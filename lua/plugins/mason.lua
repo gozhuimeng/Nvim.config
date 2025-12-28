@@ -17,13 +17,15 @@ return {
 				package:install()
 			end
 			local nvim_lsp = require("mason-lspconfig").get_mappings().package_to_lspconfig[name]
-			config.capabilities = require("blink.cmp").get_lsp_capabilities()
+			-- config.capabilities = require("blink.cmp").get_lsp_capabilities()
+			config.capabilities = require("cmp_nvim_lsp").default_capabilities()
 			config.on_attach = function(client)
 				client.server_capabilities.documentFormattingProvider = false
 				client.server_capabilities.documentRangeFormattingProvider = false
 			end
-			-- vim.lsp.config(nvim_lsp, config)
-			require("lspconfig")[nvim_lsp].setup(config)
+			vim.lsp.config(nvim_lsp, config)
+			vim.lsp.enable(nvim_lsp)
+			-- require("lspconfig")[nvim_lsp].setup(config)
 		end
 
 		-- lsp config
