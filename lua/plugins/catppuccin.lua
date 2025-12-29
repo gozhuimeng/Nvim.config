@@ -3,6 +3,7 @@ return {
 	opts = {
 		style = "Mocha",
 	},
+    -- enabled = false,
 	priority = 1000,
 	name = "catppuccin",
 	config = function(_, opts)
