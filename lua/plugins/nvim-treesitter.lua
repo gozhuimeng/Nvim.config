@@ -1,32 +1,33 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	event = "VeryLazy",
-	main = "nvim-treesitter.configs",
-	opts = {
-		highlight = { enable = true },
-	},
-	branch = "main",
+	branch = "master",
 	config = function()
-		local nvim_treesitter = require("nvim-treesitter")
-		nvim_treesitter.setup()
+		require("nvim-treesitter.configs").setup({
+			-- 安装的解析器
+			ensure_installed = { "c", "python", "lua", "markdown", "markdown_inline" },
 
-		local ensure_installed = { "lua" }
-		local pattern = {}
-		for _, parser in ipairs(ensure_installed) do
-			local has_parser, _ = pcall(vim.treesitter.language.inspect, parser)
-
-			if not has_parser then
-				nvim_treesitter.install(parser)
-			else
-				pattern = vim.tbl_extend("keep", pattern, vim.treesitter.language.get_filetypes(parser))
-			end
-		end
-		vim.api.nvim_create_autocmd("FileType", {
-			pattern = pattern,
-			callback = function()
-				vim.treesitter.start()
-			end,
+			-- 启用异步安装
+			sync_install = false,
+			-- 启用自动安装（需要有treesitter cli)
+			auto_install = true,
+			-- 不安装的解析器
+			ignore_install = {},
+			-- 启用高亮
+			highlight = {
+				enable = true,
+				-- 禁用高亮的文件类型
+				-- disable = {},
+				-- 自定义函数
+				-- 对于大文件禁用高亮
+				disable = function(lang, buf)
+					local max_filesize = 1024 * 1024 -- 1MB
+					local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+					if ok and stats and stats.size > max_filesize then
+						return true
+					end
+				end,
+				additional_vim_regex_highlighting = false,
+			},
 		})
-		vim.api.nvim_exec_autocmds("FileType", {})
 	end,
 }

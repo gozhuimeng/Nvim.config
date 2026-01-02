@@ -40,6 +40,7 @@ return {
 			},
 			git = {
 				enable = true, --显示git状态
+                ignore = false,  -- 不隐藏.gitignore内的文件和目录
 			},
 			diagnostics = {
 				enable = true, -- 显示错误/警告标记
