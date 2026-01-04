@@ -5,7 +5,7 @@ return {
 		require("rainbow-delimiters.setup").setup({
 			strategy = {
 				[""] = "rainbow-delimiters.strategy.global", -- 全局策略
-				lua = "rainbow-delimiters.strategy.local", -- Lua 使用局部策略
+				-- lua = "rainbow-delimiters.strategy.local", -- Lua 选中区域括号高亮
 			},
 			query = {
 				[""] = "rainbow-delimiters", -- 默认查询
