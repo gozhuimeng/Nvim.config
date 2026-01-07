@@ -4,7 +4,7 @@ return {
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			-- 安装的解析器
-			ensure_installed = { "c", "python", "lua", "markdown", "markdown_inline" },
+			ensure_installed = { "c", "python", "lua", "markdown", "markdown_inline", "qmljs" },
 
 			-- 启用异步安装
 			sync_install = false,
