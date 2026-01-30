@@ -52,12 +52,12 @@ return {
 			desc = "跳转到上一处输入",
 		})
 
-		vim.keymap.set({ "i", "s" }, "<S-j>", choice_next, {
+		vim.keymap.set({ "i", "s" }, "<C-n>", choice_next, {
 			silent = true,
 			desc = "跳转到下一个选择",
 		})
 
-		vim.keymap.set({ "i", "s" }, "<S-k>", choice_previous, {
+		vim.keymap.set({ "i", "s" }, "<C-p>", choice_previous, {
 			silent = true,
 			desc = "跳转到上一处选择",
 		})
