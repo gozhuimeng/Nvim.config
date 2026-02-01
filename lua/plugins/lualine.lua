@@ -14,6 +14,17 @@ return {
 		sections = {
 			-- lualine_b = { "branch", "diff" },
 			lualine_x = {
+				function()
+					-- Always show a stable Copilot indicator in the statusline.
+					if vim.fn.exists(":Copilot") == 0 then
+						return ""
+					end
+					local ok, enabled = pcall(vim.fn["copilot#Enabled"])
+					if ok and enabled == 1 then
+						return "Copilot"
+					end
+					return "Copilot(off)"
+				end,
 				"filesize",
 				"encoding",
 				"filetype",
