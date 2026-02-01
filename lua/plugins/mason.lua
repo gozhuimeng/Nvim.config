@@ -49,7 +49,10 @@ return {
 			["bash-language-server"] = {
 				-- filetypes={"zsh"},
 			},
-            jdtls = {},
+			jdtls = {
+				-- Reduce validation/diagnostics churn while typing (jdtls only)
+				flags = { debounce_text_changes = 500 }, -- 单位: ms
+			},
 		}
 
 		for server, config in pairs(servers) do
@@ -58,10 +61,11 @@ return {
 
 		-- vim.cmd("LspStart")
 		vim.diagnostic.config({
-			underline = true,
-			virtual_text = true,
-			-- virtual_lines = true,
-			update_in_insert = true,
+			underline = true, -- 下划线标识
+			-- virtual_text = true,   -- 行后显示错误信息
+			virtual_lines = true, -- 显示虚拟行
+			update_in_insert = true, -- 插入模式下更新内容
+			severity_sort = true, -- 按严重程度排序
 		})
 	end,
 }
