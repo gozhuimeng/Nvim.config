@@ -49,6 +49,7 @@ return {
 			["bash-language-server"] = {
 				-- filetypes={"zsh"},
 			},
+            jdtls = {},
 		}
 
 		for server, config in pairs(servers) do

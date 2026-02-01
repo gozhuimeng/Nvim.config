@@ -19,6 +19,7 @@ return {
 		install("clang-format")
 		install("prettier")
 		install("shfmt")
+        install("google-java-format")
 
 		local null_ls = require("null-ls")
 		null_ls.setup({
