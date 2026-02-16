@@ -3,14 +3,26 @@ return {
 	version = "v2.*",
 	build = "make install_jsregexp",
 	event = "InsertEnter",
-
+	dependencies = {
+		-- {
+		-- 	"gozhuimeng/free-snippets",
+		-- 	branch = "main", -- 指定分支
+		-- },
+		{
+			"gozhuimeng/free-snippets",
+			branch = "dev",
+		},
+		-- {
+		-- 	dir = "/home/meng/Project/free-snippets",
+		-- 	branch = "dev",
+		-- },
+	},
 	config = function()
 		local ls = require("luasnip")
 
 		ls.config.set_config({
 			history = true,
 			updateevents = "TextChanged,TextChangedI",
-			-- enable_autosnippets = false,
 			enable_autosnippets = true,
 		})
 
@@ -62,9 +74,9 @@ return {
 			desc = "跳转到上一处选择",
 		})
 
-		ls_from_lua.lazy_load({
-			paths = { vim.fn.stdpath("config") .. "/lua/snippets/lua" },
-		})
+		-- ls_from_lua.lazy_load({
+		-- 	paths = { vim.fn.stdpath("config") .. "/lua/snippets/lua" },
+		-- })
 
 		-- disenable
 		-- local ls_from_vscode = require("luasnip.loaders.from_vscode")
