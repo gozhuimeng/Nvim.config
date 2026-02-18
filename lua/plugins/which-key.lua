@@ -19,6 +19,12 @@ return {
 			{ "<leader>m", group = "markdow" },
 			{ "<leader>h", group = "hop跳转" },
 			{ "<leader>l", group = "lsp服务" },
+			{
+				mode = { "x", "n" },
+				{ "<leader>a", group = "llm server" },
+				{ "<leader>al", group = "local llm translate" },
+				{ "<leader>ac", group = "cloud llm translate" },
+			},
 		},
 	},
 }

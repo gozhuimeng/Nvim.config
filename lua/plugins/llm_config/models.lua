@@ -17,26 +17,31 @@ local models = {
 			return os.getenv("SILICONFLOW_API_KEY")
 		end,
 	},
-	ollama = {
-		name = "Ollama-openai/Qwen2.5-Coder-0.5b-Instruct",
+	ollama_qwen2_5_coder_0_5b = {
+		name = "Ollama/Qwen2.5-Coder:0.5b-Instruct",
 		url = "http://192.168.1.8:11434/v1/chat/completions",
 		model = "qwen2.5-coder:0.5b-instruct-q8_0",
 		api_type = "openai",
 		fetch_key = "None",
 	},
-	ollama2 = {
-		name = "Ollama/Qwen2.5-Coder-0.5b-Instruct",
+	ollama_qwen3_0_6b = {
+		name = "Ollama/Qwen3:0.6b",
 		url = "http://192.168.1.8:11434/api/chat",
-		model = "qwen2.5-coder:0.5b-instruct-q8_0",
+		model = "qwen3:0.6b",
 		api_type = "ollama",
 		fetch_key = "None",
+		keep_alive = "1m",
 	},
 }
 
+local models_key_name = { "iflow", "siliconflow", "ollama_qwen2_5_coder_0_5b", "ollama_qwen3_0_6b" }
+
 local function get_unname_config(models_tables)
 	local result_models_list = {}
-	for _, value in pairs(models_tables) do
-		table.insert(result_models_list, value)
+	for _, key in ipairs(models_key_name) do
+		if models_tables[key] then
+			table.insert(result_models_list, models_tables[key])
+		end
 	end
 	return result_models_list
 end
