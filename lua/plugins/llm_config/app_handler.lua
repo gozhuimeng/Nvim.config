@@ -31,11 +31,15 @@ local base_opt = {
 }
 
 local function get_opts(base_opts, model_opts)
+	local return_opts = {}
 	for k, v in pairs(model_opts) do
-		base_opts[k] = v
+		return_opts[k] = v
+	end
+	for k, v in pairs(base_opts) do
+		return_opts[k] = v
 	end
 
-	return base_opts
+	return return_opts
 end
 
 return {
@@ -53,6 +57,7 @@ return {
 		handler = tools.flexi_handler,
 		prompt = prompt.translate_to_chinese,
 		opts = get_opts(base_opt, models.iflow),
+		-- opts = models.iflow,
 	},
 	WordTranslateLocal2C = {
 		handler = tools.flexi_handler,
