@@ -1,33 +1,46 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	branch = "master",
+	branch = "main",
+	build = ":TSUpate",
 	config = function()
-		require("nvim-treesitter.configs").setup({
-			-- 安装的解析器
-			ensure_installed = { "c", "python", "lua", "markdown", "markdown_inline", "qmljs" },
+		-- 判断目录下是否存在对应语言的parser
+		local function check_parser_exists(parser_path, parser)
+			local f = io.open(parser_path .. "parser/" .. parser .. ".so", "r")
+			if f then
+				f:close()
+				return true
+			end
+			return false
+		end
 
+		-- 指定安装parser的目录
+		local install_dir = vim.fn.stdpath("data") .. "/site/"
+
+		require("nvim-treesitter").setup({
+			install_dir = install_dir,
 			-- 启用异步安装
 			sync_install = false,
-			-- 启用自动安装（需要有treesitter cli)
-			auto_install = true,
-			-- 不安装的解析器
-			ignore_install = {},
-			-- 启用高亮
-			highlight = {
-				enable = true,
-				-- 禁用高亮的文件类型
-				-- disable = {},
-				-- 自定义函数
-				-- 对于大文件禁用高亮
-				disable = function(lang, buf)
-					local max_filesize = 1024 * 1024 -- 1MB
-					local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-					if ok and stats and stats.size > max_filesize then
-						return true
-					end
-				end,
-				additional_vim_regex_highlighting = false,
-			},
+		})
+
+		local lang = { "c", "python", "markdown", "lua", "qmljs", "vim" }
+		local pattern = {}
+
+		for _, parser in ipairs(lang) do
+			-- 如果parser不存在则安装，存在则添加到加载列表
+			if not check_parser_exists(install_dir, parser) then
+				require("nvim-treesitter").install(parser)
+			else
+				pattern = vim.tbl_extend("keep", pattern, vim.treesitter.language.get_filetypes(parser))
+			end
+		end
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = pattern,
+			callback = function()
+				-- 避免pattern为空而导致的加载所有parser，但此时可能未下载parser，将会导致加载错误
+				if not vim.tbl_isempty(pattern) then
+					vim.treesitter.start()
+				end
+			end,
 		})
 	end,
 }
