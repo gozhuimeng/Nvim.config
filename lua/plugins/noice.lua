@@ -8,6 +8,9 @@ return {
 
 		-- optional
 		"rcarriga/nvim-notify",
+
+        -- treesitter
+        "nvim-treesitter/nvim-treesitter"
 	},
 	config = function()
 		require("notify").setup({
