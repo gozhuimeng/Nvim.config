@@ -1,4 +1,4 @@
--- Enable line numers and relative line numbers
+-- Enable line numbers and relative line numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -11,7 +11,7 @@ vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 0
 
--- Automatically reload modifird file
+-- Automatically reload modified file
 vim.opt.autoread = true
 
 -- Set "<Leader>"
@@ -19,7 +19,7 @@ vim.g.mapleader = " "
 
 -- Set the split direction, but I don't want to do than.
 -- vim.opt.splitbelow = true
--- vim.opt.splitright = ture
+-- vim.opt.splitright = true
 
 -- The search is not case sensitive,
 -- but is case sensitive when it contains uppercase characters.
@@ -37,3 +37,7 @@ vim.opt.wrap = false
 
 -- 共享系统剪切板
 vim.opt.clipboard = "unnamedplus"
+
+-- 拼写检查
+vim.opt.spell = true
+vim.opt.spelllang = { "en_us", "cjk" }
