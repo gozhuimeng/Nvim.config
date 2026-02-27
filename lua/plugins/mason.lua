@@ -29,6 +29,10 @@ return {
 			-- require("lspconfig")[nvim_lsp].setup(config)
 		end
 
+		local OpenAPI_schema_3_0 = "file://"
+			.. vim.fn.stdpath("config")
+			.. "/lua/plugins/mason_config/yaml_language_server/schema/OpenAPI_3_0.json"
+
 		-- lsp config
 		local servers = {
 			["lua-language-server"] = {
@@ -52,6 +56,24 @@ return {
 			jdtls = {
 				-- Reduce validation/diagnostics churn while typing (jdtls only)
 				flags = { debounce_text_changes = 500 }, -- 单位: ms
+			},
+			["yaml-language-server"] = {
+				settings = {
+					yaml = {
+						schemas = {
+							[OpenAPI_schema_3_0] = {
+								"openapi.yaml",
+								"openapi.yml",
+								"*openapi*.yaml",
+								"*openapi*.yml",
+							},
+						},
+						validate = true,
+						hover = true,
+						completion = true,
+					},
+				},
+				filetypes = { "yaml", "yml" },
 			},
 		}
 
