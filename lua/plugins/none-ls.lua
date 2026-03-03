@@ -19,7 +19,7 @@ return {
 		install("clang-format")
 		install("prettier")
 		install("shfmt")
-        install("google-java-format")
+		install("google-java-format")
 
 		local null_ls = require("null-ls")
 		null_ls.setup({
@@ -34,7 +34,9 @@ return {
 				-- C/C++
 				null_ls.builtins.formatting.clang_format,
 				-- JS/TS
-				null_ls.builtins.formatting.prettier,
+				null_ls.builtins.formatting.prettier.with({
+					extra_args = { "--tab-width", "4" },
+				}),
 
 				-- sh
 				null_ls.builtins.formatting.shfmt.with({
