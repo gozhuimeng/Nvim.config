@@ -15,3 +15,9 @@
 
 - 每次进入Nvim都将会自动编译缺失`.spl`二进制文件
 - 二进制`.spl`如果和`.add`文件版本不一致或功能异常，请使用`:RecompileAllSpell`重新编译所有文件或者通过`:mkspell! <filepath>`编译指定的spell
+
+#### mason
+
+- jdtls
+    - 需要拥有java 21或以上的jdk，如果存在多个jdk(例如使用sdkman)，可以在mason.nvim中通过cmd指定jdk
+

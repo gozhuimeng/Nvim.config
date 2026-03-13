@@ -56,6 +56,10 @@ return {
 			jdtls = {
 				-- Reduce validation/diagnostics churn while typing (jdtls only)
 				flags = { debounce_text_changes = 500 }, -- 单位: ms
+                cmd = {
+                    -- 此处需要自己添加java 21或以上的jdk环境
+                    "~/.sdkman/candidates/java/21.0.10-tem/bin/java"
+                }
 			},
 			["yaml-language-server"] = {
 				settings = {
