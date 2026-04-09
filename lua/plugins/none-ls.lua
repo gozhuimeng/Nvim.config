@@ -1,5 +1,6 @@
 return {
 	"nvimtools/none-ls.nvim",
+    enabled =false,
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 	},
@@ -20,6 +21,7 @@ return {
 		install("prettier")
 		install("shfmt")
 		install("google-java-format")
+		install("rustfmt")
 
 		local null_ls = require("null-ls")
 		null_ls.setup({
@@ -37,20 +39,12 @@ return {
 				null_ls.builtins.formatting.prettier.with({
 					extra_args = { "--tab-width", "4" },
 				}),
-
 				-- sh
 				null_ls.builtins.formatting.shfmt.with({
 					filetypes = { "sh", "bash", "zsh" },
 				}),
-				-- null_ls.builtins.formatting.shfmt.with({
-				-- 	filetypes = { "sh", "zsh" },
-				-- 	extra_args = {
-				-- 		"-ln",
-				-- 		"zsh",
-				-- 		"-i",
-				-- 		"2",
-				-- 	},
-				-- }),
+				-- -- rust
+				-- null_ls.builtins.formatting.rustfmt,
 			},
 		})
 	end,
