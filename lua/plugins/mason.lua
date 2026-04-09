@@ -56,9 +56,9 @@ return {
 			jdtls = {
 				-- Reduce validation/diagnostics churn while typing (jdtls only)
 				flags = { debounce_text_changes = 500 }, -- 单位: ms
-                cmd_env = {
-                    JAVA_HOME="/home/meng/.sdkman/candidates/java/21.0.10-tem"
-                }
+				cmd_env = {
+					JAVA_HOME = "/home/meng/.sdkman/candidates/java/21.0.10-tem",
+				},
 			},
 			["yaml-language-server"] = {
 				settings = {
@@ -78,6 +78,7 @@ return {
 				},
 				filetypes = { "yaml", "yml" },
 			},
+			["rust-analyzer"] = {},
 		}
 
 		for server, config in pairs(servers) do
