@@ -21,3 +21,12 @@
 - jdtls
     - 需要拥有java 21或以上的jdk，如果存在多个jdk(例如使用sdkman)，可以在mason.nvim中通过cmd指定jdk
 
+#### opencode.nvim
+
+- 依赖系统命令`lsof`，用于自动检测 opencode 进程
+    - Arch: `sudo pacman -S lsof`
+    - Debian/Ubuntu: `sudo apt install lsof`
+    - macOS: 已有
+- 通过 lazy.nvim 加载，使用前请确保 opencode CLI 已安装
+- 首次启动需要等待一小段时间初始化
+
