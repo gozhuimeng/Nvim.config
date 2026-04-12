@@ -158,8 +158,8 @@ return {
 			end
 		end
 
-		-- Leader 方案（更稳定，避免 <C-a>/<C-x> 被终端或其他插件吞键）
-		vim.keymap.set({ "n", "x" }, "<leader>oa", function()
+		-- Leader 方案（终端模式下 Vim 内置等待机制导致空格延迟，已禁用）
+		--[[ vim.keymap.set({ "n", "x" }, "<leader>oa", function()
 			opencode_safe(function()
 				require("opencode").ask("@this: ", { submit = true })
 			end)
@@ -185,7 +185,7 @@ return {
 
 		vim.keymap.set({ "n", "t" }, "<leader>ot", function()
 			require("opencode").toggle()
-		end, { desc = "切换 opencode 面板" })
+		end, { desc = "切换 opencode 面板" }) --]]
 
 		-- 向 opencode 询问当前选择/光标位置
 		vim.keymap.set({ "n", "x" }, "<C-a>", function()
