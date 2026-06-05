@@ -1,7 +1,7 @@
 return {
 	"yetone/avante.nvim",
 	event = "VeryLazy",
-	enabled = false,
+	enabled = true,
 	-- 适应不同平台
 	build = vim.fn.has("win32") ~= 0 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
 		or "make",
@@ -47,55 +47,12 @@ return {
 	-- config
 	config = function()
 		require("avante").setup({
-			provider = "qwencoder",
-			providers = {
-				qwencoder = {
-					-- disable function/tool calling if the model does not support it
-					disable_tools = true,
-					__inherited_from = "openai",
-					api_key_name = "SILICONFLOW_API_KEY",
-					endpoint = "https://api.siliconflow.cn/v1",
-					model = "Qwen/Qwen2.5-Coder-7B-Instruct",
-					timeout = 30000, -- 超时时间(ms)
-					extra_request_body = {
-						temperature = 0.75,
-						max_tokens = 16384,
-					},
-				},
-				deepseek = {
-					disable_tools = true,
-					__inherited_from = "openai",
-					api_key_name = "SILICONFLOW_API_KEY",
-					endpoint = "https://api.siliconflow.cn/v1",
-					model = "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
-					timeout = 30000,
-					extra_request_body = {
-						temperature = 0.75,
-						max_tokens = 16384,
-					},
-				},
-				qwen3 = {
-					disable_tools = true,
-					__inherited_from = "openai",
-					api_key_name = "SILICONFLOW_API_KEY",
-					endpoint = "https://api.siliconflow.cn/v1",
-					model = "Qwen/Qwen3-8B",
-					timeout = 30000,
-					extra_request_body = {
-						temperature = 0.75,
-						max_tokens = 16384,
-					},
-				},
-				glmz1 = {
-					disable_tools = true,
-					__inherited_from = "openai",
-					api_key_name = "SILICONFLOW_API_KEY",
-					endpoint = "https://api.siliconflow.cn/v1",
-					model = "THUDM/GLM-Z1-9B-0414",
-					timeout = 30000,
-					extra_request_body = {
-						temperature = 0.75,
-						max_tokens = 16384,
+			acp_providers = {
+				["opencode"] = {
+					command = "opencode",
+					env = {
+						CACHE_TUI_LANG = "zh",
+						OPENCODE_ENABLE_EXA = 1,
 					},
 				},
 			},
