@@ -41,3 +41,6 @@ vim.opt.clipboard = "unnamedplus"
 -- 拼写检查
 vim.opt.spell = true
 vim.opt.spelllang = { "en_us", "cjk" }
+
+-- Neovim 远程插件 Python 环境 (molten-nvim 等)
+vim.g.python3_host_prog = "/home/meng/.local/bin/pynvim-python"
