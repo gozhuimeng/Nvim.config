@@ -16,7 +16,8 @@ return {
 			border = "rounded", -- 窗口圆角
 		},
 		spec = {
-			{ "<leader>m", group = "markdow" },
+			{ "<leader>m", group = "markdown" },
+			{ "<leader>j", group = "jupyter" },
 			{ "<leader>h", group = "hop跳转" },
 			{ "<leader>l", group = "lsp服务" },
 			{

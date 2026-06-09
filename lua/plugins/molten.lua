@@ -44,20 +44,20 @@ return {
 		"benlubas/molten-nvim",
 		keys = {
 			-- 初始化内核
-			{ "<leader>mi", ":MoltenInit<CR>", silent = true, desc = "初始化内核" },
+			{ "<leader>ji", ":MoltenInit<CR>", silent = true, desc = "初始化内核" },
 
 			-- 执行代码
-			{ "<leader>me", ":MoltenEvaluateOperator<CR>", silent = true, desc = "执行选中代码" },
-			{ "<leader>ml", ":MoltenEvaluateLine<CR>", silent = true, desc = "执行当前行" },
-			{ "<leader>mr", ":MoltenReevaluateCell<CR>", silent = true, desc = "重新执行单元格" },
-			{ "<leader>mv", ":<C-u>MoltenEvaluateVisual<CR>gv", mode = "v", silent = true, desc = "执行可视选区" },
+			{ "<leader>je", ":MoltenEvaluateOperator<CR>", silent = true, desc = "执行代码块" },
+			{ "<leader>jl", ":MoltenEvaluateLine<CR>", silent = true, desc = "执行当前行" },
+			{ "<leader>jr", ":MoltenReevaluateCell<CR>", silent = true, desc = "重新执行单元格" },
+			{ "<leader>jv", ":<C-u>MoltenEvaluateVisual<CR>gv", mode = "v", silent = true, desc = "执行可视选区" },
 
 			-- 输出窗口管理
-			{ "<leader>mo", ":noautocmd MoltenEnterOutput<CR>", silent = true, desc = "打开输出窗口" },
-			{ "<leader>mh", ":MoltenHideOutput<CR>", silent = true, desc = "隐藏输出窗口" },
+			{ "<leader>jo", ":noautocmd MoltenEnterOutput<CR>", silent = true, desc = "打开输出窗口" },
+			{ "<leader>jh", ":MoltenHideOutput<CR>", silent = true, desc = "隐藏输出窗口" },
 
 			-- 单元格管理
-			{ "<leader>md", ":MoltenDelete<CR>", silent = true, desc = "删除单元格" },
+			{ "<leader>jd", ":MoltenDelete<CR>", silent = true, desc = "删除单元格" },
 		},
 	},
 }

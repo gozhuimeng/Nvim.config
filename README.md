@@ -47,6 +47,6 @@
     uv sync
     uv run ipython kernel install --user --env VIRTUAL_ENV $(pwd)/.venv --name=<内核名>
     ```
-- 键位映射：以 `<leader>m` 为前缀（如 `<leader>mi` 初始化内核）
+- 键位映射：以 `<leader>j` 为前缀（如 `<leader>ji` 初始化内核）
 - 图像渲染依赖 `image.nvim`，需要支持图形协议的终端（如 Kitty）
 
