@@ -44,7 +44,7 @@ return {
 					},
 				},
 			},
-			pyright = {},
+			basedpyright = {},
 			["html-lsp"] = {},
 			["css-lsp"] = {},
 			["typescript-language-server"] = {},
