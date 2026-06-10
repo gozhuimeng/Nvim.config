@@ -16,20 +16,41 @@ return {
 				typescriptreact = { "prettier" },
 				json = { "prettier" },
 				markdown = { "prettier" },
+				quarto = { "injected", "prettier" }, -- 先格式化代码块，再格式化 markdown
 				sh = { "shfmt" },
 				bash = { "shfmt" },
 				zsh = { "shfmt" },
 				rust = { "rustfmt" },
 			},
-			format_on_save = {
-				timeout_ms = 500,
-				lsp_fallback = true,
+			formatters = {
+				prettier = {
+					command = vim.fn.stdpath("data") .. "/mason/bin/prettier",
+					options = {
+						ext_parsers = {
+							qmd = "markdown",
+						},
+					},
+				},
+				stylua = {
+					command = vim.fn.stdpath("data") .. "/mason/bin/stylua",
+				},
+				black = {
+					command = vim.fn.stdpath("data") .. "/mason/bin/black",
+				},
+				shfmt = {
+					command = vim.fn.stdpath("data") .. "/mason/bin/shfmt",
+				},
+				["clang-format"] = {
+					command = vim.fn.stdpath("data") .. "/mason/bin/clang-format",
+				},
 			},
+		format_on_save = {
+			timeout_ms = 2000,
+			lsp_fallback = true,
+		},
 		})
 
-		require("mason-conform").setup({
-			ignore_install = { "prettier" },
-		})
+		require("mason-conform").setup({})
 	end,
 	keys = {
 		{
