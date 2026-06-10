@@ -6,9 +6,9 @@ return {
 		vim.fn["mkdp#util#install"]()
 	end,
 	init = function()
-		vim.g.mkdp_filetypes = { "markdown" }
+		vim.g.mkdp_filetypes = { "markdown", "quarto" }
 	end,
-	ft = { "markdown" },
+	ft = { "markdown", "quarto" },
 	config = function()
 		-- vim.g.mkdp_auto_start = 1  -- 打开markdown的时候自动启用预览
 		vim.g.mkdp_auto_close = 1 -- 关闭markdown的时候自动关闭预览

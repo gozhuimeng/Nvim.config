@@ -6,7 +6,7 @@ return {
 		-- mini icons (Optional)
 		"nvim-mini/mini.icons",
 	},
-	ft = { "markdown", "llm" },
+	ft = { "markdown", "llm", "quarto" },
 
 	config = function()
 		require("render-markdown").setup({

@@ -13,6 +13,17 @@ return {
 	},
 	config = function()
 		local api = require("nvim-tree.api")
+		local devicons = require("nvim-web-devicons")
+
+		-- 添加 quarto 文件图标
+		devicons.set_icon({
+			qmd = {
+				icon = "q",
+				color = "#519ABA",
+				cterm_color = 75,
+				name = "Quarto",
+			},
+		})
 
 		local function on_attach(bufnr)
 			-- 原有配置
