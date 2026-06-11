@@ -1,9 +1,7 @@
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
 	dependencies = {
-		-- treesitter
 		"nvim-treesitter/nvim-treesitter",
-		-- mini icons (Optional)
 		"nvim-mini/mini.icons",
 	},
 	ft = { "markdown", "llm", "quarto" },
@@ -14,7 +12,7 @@ return {
 			heading = {
 				enabled = true,
 				sign = false,
-				position = "overlay", -- inline | overlay
+				position = "overlay",
 				icons = { "󰎤 ", "󰎧 ", "󰎪 ", "󰎭 ", "󰎱 ", "󰎳 " },
 				signs = { "󰫎 " },
 				width = "block",
@@ -44,7 +42,10 @@ return {
 				left_margin = 0.5,
 				highlight = "RenderMarkdownDash",
 			},
-			code = { style = "normal" },
+			code = {
+				language_icon = true,
+				language_name = true,
+			},
 		})
 	end,
 }

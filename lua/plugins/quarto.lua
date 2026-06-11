@@ -24,15 +24,40 @@ return {
 			local runner = require("quarto.runner")
 			local function run_and_insert(fn)
 				return function()
-					fn()
+					pcall(fn)
 					vim.cmd("startinsert")
 				end
 			end
-			vim.keymap.set("n", "<leader>rc", run_and_insert(runner.run_cell), { desc = "运行当前 cell", silent = true })
-			vim.keymap.set("n", "<leader>ra", run_and_insert(runner.run_above), { desc = "运行当前及上方 cell", silent = true })
-			vim.keymap.set("n", "<leader>rA", run_and_insert(runner.run_all), { desc = "运行所有 cell", silent = true })
-			vim.keymap.set("n", "<leader>rl", run_and_insert(runner.run_line), { desc = "运行当前行", silent = true })
-			vim.keymap.set("v", "<leader>rv", run_and_insert(runner.run_range), { desc = "运行选区代码", silent = true })
+			vim.keymap.set(
+				"n",
+				"<leader>rc",
+				run_and_insert(runner.run_cell),
+				{ desc = "运行当前 cell", silent = true }
+			)
+			vim.keymap.set(
+				"n",
+				"<leader>ra",
+				run_and_insert(runner.run_above),
+				{ desc = "运行当前及上方 cell", silent = true }
+			)
+			vim.keymap.set(
+				"n",
+				"<leader>rA",
+				run_and_insert(runner.run_all),
+				{ desc = "运行所有 cell", silent = true }
+			)
+			vim.keymap.set(
+				"n",
+				"<leader>rl",
+				run_and_insert(runner.run_line),
+				{ desc = "运行当前行", silent = true }
+			)
+			vim.keymap.set(
+				"v",
+				"<leader>rv",
+				run_and_insert(runner.run_range),
+				{ desc = "运行选区代码", silent = true }
+			)
 		end,
 	},
 }
