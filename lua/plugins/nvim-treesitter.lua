@@ -12,7 +12,8 @@ return {
 			sync_install = false,
 		})
 
-		local lang = { "c", "cpp", "python", "markdown", "lua", "qmljs", "vim", "json", "java", "rust" }
+		local lang =
+			{ "c", "cpp", "python", "markdown", "html", "lua", "qmljs", "vim", "json", "java", "rust", "typescript" }
 
 		-- 安装 parser（只做安装，不做 attach 判断）
 		for _, parser in ipairs(lang) do

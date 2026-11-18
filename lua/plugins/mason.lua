@@ -79,6 +79,7 @@ return {
 				filetypes = { "yaml", "yml" },
 			},
 			["rust-analyzer"] = {},
+			["taplo"] = {},
 		}
 
 		for server, config in pairs(servers) do

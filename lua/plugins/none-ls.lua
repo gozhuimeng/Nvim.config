@@ -1,6 +1,6 @@
 return {
 	"nvimtools/none-ls.nvim",
-    enabled =false,
+	enabled = false,
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 	},
@@ -22,6 +22,7 @@ return {
 		install("shfmt")
 		install("google-java-format")
 		install("rustfmt")
+		install("sql-formatter")
 
 		local null_ls = require("null-ls")
 		null_ls.setup({

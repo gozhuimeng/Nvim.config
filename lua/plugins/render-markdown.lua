@@ -42,10 +42,29 @@ return {
 				left_margin = 0.5,
 				highlight = "RenderMarkdownDash",
 			},
-			code = {
-				language_icon = true,
-				language_name = true,
+		code = {
+			language_icon = true,
+			language_name = true,
+		},
+		html = {
+			enabled = true,
+			tag = {
+				details = {
+					icon = "> ",
+					highlight = "RenderMarkdownHtmlTag",
+					scope_highlight = "RenderMarkdownHtmlTag",
+				},
+				summary = {
+					icon = "",
+					highlight = "RenderMarkdownHtmlTag",
+				},
+				pre = {
+					icon = "",
+					highlight = "RenderMarkdownCode",
+					scope_highlight = "RenderMarkdownCode",
+				},
 			},
+		},
 		})
 	end,
 }

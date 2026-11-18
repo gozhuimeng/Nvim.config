@@ -4,6 +4,9 @@ return {
 	event = "VeryLazy",
 	opts = {},
 	config = function()
+		local ignore_override_patterns = {
+			"%.opencode/",
+		}
 		require("conform").setup({
 			formatters_by_ft = {
 				lua = { "stylua" },
@@ -16,20 +19,28 @@ return {
 				typescriptreact = { "prettier" },
 				json = { "prettier" },
 				markdown = { "prettier" },
-				quarto = { "injected", "prettier" }, -- 先格式化代码块，再格式化 markdown
+				quarto = { "panache" },
 				sh = { "shfmt" },
 				bash = { "shfmt" },
 				zsh = { "shfmt" },
 				rust = { "rustfmt" },
+				sql = { "sql_formatter" }, -- mason 包 sql-formatter
+				toml = { "taplo" },
 			},
 			formatters = {
 				prettier = {
 					command = vim.fn.stdpath("data") .. "/mason/bin/prettier",
-					options = {
-						ext_parsers = {
-							qmd = "markdown",
-						},
-					},
+					args = function(self, ctx)
+						local args = { "--stdin-filepath", ctx.filename }
+						for _, pat in ipairs(ignore_override_patterns) do
+							if ctx.filename:find(pat) then
+								table.insert(args, 1, "--ignore-path")
+								table.insert(args, 2, "/dev/null")
+							end
+						end
+						-- vim.notify("conform prettier args: " .. vim.inspect(args), vim.log.levels.WARN)
+						return args
+					end,
 				},
 				stylua = {
 					command = vim.fn.stdpath("data") .. "/mason/bin/stylua",
@@ -43,11 +54,14 @@ return {
 				["clang-format"] = {
 					command = vim.fn.stdpath("data") .. "/mason/bin/clang-format",
 				},
+				sql_formatter = {
+					command = vim.fn.stdpath("data") .. "/mason/bin/sql-formatter",
+				},
 			},
-		format_on_save = {
-			timeout_ms = 2000,
-			lsp_fallback = true,
-		},
+			format_on_save = {
+				timeout_ms = 2000,
+				lsp_fallback = true,
+			},
 		})
 
 		require("mason-conform").setup({})

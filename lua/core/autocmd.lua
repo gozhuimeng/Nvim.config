@@ -19,6 +19,19 @@ vim.api.nvim_create_autocmd("VimEnter", {
 	end,
 })
 
+-- Neovim 自带的 ftplugin/sql.vim 会在 SQL 缓冲区把插入模式的 <Left>/<Right>
+-- 绑到 sqlcomplete#DrillOutOfColumns() / sqlcomplete#DrillIntoTable()，
+-- 每按一次方向键都会短暂打开 "=" 表达式寄存器，被 noice 渲染成
+-- 标题为 Calculator 的弹窗。这里删掉这两个映射，恢复方向键的原始行为。
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "sql",
+	callback = function(args)
+		pcall(vim.keymap.del, "i", "<Left>", { buffer = args.buf })
+		pcall(vim.keymap.del, "i", "<Right>", { buffer = args.buf })
+	end,
+	desc = "恢复 SQL 缓冲区的方向键",
+})
+
 -- spell
 -- spellfile's path
 local base_dir = vim.fn.stdpath("config") .. "/lua/core/spell/"
