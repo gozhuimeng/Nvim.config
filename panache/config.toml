@@ -1,0 +1,29 @@
+# Panache 用户级配置（所有项目生效）。
+#
+# 这里只做一件事：让 panache format 顺带格式化 qmd 里的代码块。
+# panache 本身负责 Markdown 排版，代码块里的代码必须显式配置外部格式化器。
+#
+# 注意：如果某个项目根目录有自己的 panache.toml / .panache.toml，
+# panache 会优先使用它，而不会合并这个文件。需要的话在项目配置里
+# 写 `extend = "~/.config/panache/config.toml"`。
+
+[formatters]
+# Rust：官方 rustfmt 只认合法 .rs 文件，而学习笔记常写 evcxr 风格的
+# 顶层语句（let x = 1;），所以套一层包装器，见下面 cmd。
+rust = "evcxr-rustfmt"
+# Python：black（和 conform 里 .py 文件用的是同一个格式化器，
+# 由 Mason 安装，mason/bin 在 nvim 的 PATH 中）。
+python = "black"
+
+[formatters.evcxr-rustfmt]
+# bin/ 目录已由 lua/core/basic.lua 加入 PATH，所以这里直接写命令名
+cmd = "rustfmt-evcxr"
+stdin = true
+args = []
+
+# 如果更想用 ruff format（更快，和 ruff lint 同一套）：
+# 1. 把上面的 python 改成 "ruff"
+# 2. 安装 ruff（uv tool install ruff），并确保它在 PATH 中，
+#    或者在下面覆盖命令路径：
+# [formatters.ruff]
+# cmd = "/home/zephyr/.local/bin/ruff"

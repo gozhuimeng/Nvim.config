@@ -1,0 +1,97 @@
+#!/usr/bin/env python3
+"""rustfmt 包装器：让 evcxr 风格的 Rust 代码块也能被格式化。
+
+为什么需要它：rustfmt 只接受合法的 .rs 文件（顶层只能是 item）。
+而 qmd 里的 Rust chunk 经常是 evcxr 风格（顶层语句，如 `let x = 1;`），
+直接交给 rustfmt 会解析失败、原样返回。
+
+做法：
+  1. 把代码包进 `fn main() { ... }`，这样顶层语句也合法；
+  2. 运行 rustfmt；
+  3. 拆掉包装、去掉统一的 4 空格缩进；
+  4. 保留 chunk 顶部的 `:dep` 行（evcxr 指令，不是合法 Rust）。
+任何一步失败都原样返回输入，不会破坏内容。
+
+panache.toml 用法：
+  [formatters]
+  rust = "evcxr-rustfmt"
+
+  [formatters.evcxr-rustfmt]
+  cmd = "~/.local/bin/rustfmt-evcxr"  # 写成绝对路径
+  stdin = true
+  args = []
+"""
+
+from __future__ import annotations
+
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+DEFAULT_EDITION = "2021"
+
+
+def detect_edition() -> str:
+    """从当前目录的 Cargo.toml 读 edition，读不到就用默认值。"""
+    try:
+        text = Path("Cargo.toml").read_text(encoding="utf-8")
+    except OSError:
+        return DEFAULT_EDITION
+    match = re.search(r'^\s*edition\s*=\s*"(\d+)"', text, re.MULTILINE)
+    return match.group(1) if match else DEFAULT_EDITION
+
+
+def main() -> None:
+    src = sys.stdin.read()
+    lines = src.splitlines()
+
+    # 1. 分离顶部的 :dep 指令（可能有多行）
+    deps: list[str] = []
+    i = 0
+    while i < len(lines) and lines[i].lstrip().startswith(":dep"):
+        deps.append(lines[i])
+        i += 1
+    body = lines[i:]
+
+    if not any(line.strip() for line in body):
+        sys.stdout.write("".join(line + "\n" for line in deps))
+        return
+
+    # 2. 包进 fn main，交给 rustfmt
+    wrapped = "fn main() {\n" + "\n".join(body) + "\n}\n"
+    try:
+        proc = subprocess.run(
+            ["rustfmt", "--edition", detect_edition(), "--emit", "stdout"],
+            input=wrapped,
+            text=True,
+            capture_output=True,
+            timeout=10,
+        )
+    except (OSError, subprocess.SubprocessError):
+        sys.stdout.write(src)
+        return
+
+    if proc.returncode != 0 or not proc.stdout.strip():
+        sys.stdout.write(src)
+        return
+
+    # 3. 拆包装：去掉第一行 fn main() {、最后的 }、以及统一的 4 空格缩进
+    out = proc.stdout.splitlines()
+    body_lines = out[1:]
+    while body_lines and not body_lines[-1].strip():
+        body_lines.pop()
+    if body_lines and body_lines[-1].strip() == "}":
+        body_lines.pop()
+
+    dedented = []
+    for line in body_lines:
+        dedented.append(line[4:] if line.startswith("    ") else line)
+
+    # 4. 把 :dep 放回顶部
+    result = deps + dedented
+    sys.stdout.write("\n".join(result) + "\n" if result else "")
+
+
+if __name__ == "__main__":
+    main()

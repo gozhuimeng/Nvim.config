@@ -44,3 +44,14 @@ vim.opt.spelllang = { "en_us", "cjk" }
 
 -- Neovim 远程插件 Python 环境 (molten-nvim 等)
 vim.g.python3_host_prog = "/home/meng/.local/bin/pynvim-python"
+
+-- 仓库自带的命令（如 bin/rustfmt-evcxr）加入 PATH，
+-- 这样 panache / conform 等子进程可以直接按命令名调用。
+local config_bin = vim.fn.stdpath("config") .. "/bin"
+if not vim.env.PATH:find(config_bin, 1, true) then
+	vim.env.PATH = config_bin .. ":" .. vim.env.PATH
+end
+
+-- panache 的用户级配置改用仓库内的 panache/config.toml，
+-- 不再依赖 ~/.config/panache/config.toml。
+vim.env.PANACHE_CONFIG = vim.fn.stdpath("config") .. "/panache/config.toml"
